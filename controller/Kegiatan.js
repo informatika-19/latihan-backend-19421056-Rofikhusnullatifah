@@ -1,14 +1,16 @@
-const kegiatanModel = require('../model/kegiatan')
+const kegiatanModel = require ('../model/kegiatan')
 
-exports.create= (data) =>
-  new Promise((resolve, reject)=> {
-    //kegiatanModel.create() fungsi untuk menyimpan kegiatan yang di imput
-    kegiatanModel.create(data)
-      .then(()=> resolve({
-        status : true,
-        pesan : 'berhasil iput'
-      })).catch(()=> ({
+exports.create = (data) =>
+new Promise((resolve, reject) =>{
+
+// fungsi untuk menyimpan kegiatan
+kegiatanModel.create(data)
+.then(() => resolve ({
+    status : true,
+    pesan: 'berhasil input kegiatan'
+})).catch (() => reject({
     status : false,
-    pesan : 'gagal iput'
-      }))
-  })
+    pesan: 'gagal input kegiatan'
+}))
+
+})

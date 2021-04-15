@@ -1,54 +1,48 @@
-const { Console } = require('console')
 const express = require('express')
 const app = express()
-const bodyParser= require('body-parser')
-const mongoose= require ('mongoose')
+const bodyParser = require('body-parser')
+ const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/latihan', {
+ mongoose.connect('mongodb://localhost:27017/latihan', {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-}).then (() => {
-    console.log('connected')
-}).catch((e)=>{
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+}).then(() =>{
+    console.log('berhasil konek ke database')
+}).catch((e) => {
     console.log(e)
-    console.log('unconnected')
+    console.log('gagal konek ke database')
 })
-
 app.use(bodyParser.json({
-    extend: true,
+    extends: true, 
     limit: '20mb'
 }))
-
 app.use(bodyParser.urlencoded({
-    extend: true,
+    extends: true, 
     limit: '20mb'
 }))
 
-app.get('/', (req, res)=>{
-    res.send('<h1>hello world 1</h1>')
-
-})
-
-app.get('/profile/:username/:id', (req, res)=>{
+app.get('/profile/:username/:id', (req, res) => {
     console.log(req.params)
-    res.send('username = '+ req.params.username)
+  res.send('Username Anda' + req.params.username)
 })
-//req params
-app.get('/daerah/:daerah', (req, res)=>{
+app.get('/', (req, res) => {
+  res.send('Hello Word')
+})
+app.get('/daerah/:namadaerah/:id', (req, res) => {
     console.log(req.params)
-    res.send('daerah anda = '+ req.params.daerah)
+    const namaDaerah = reg.params.namadaerah
+    const idDaerah = reg.params.id
+  res.send('Anda Di ' + namadaerah + ' ID Daerah = ' + idDaerah)
 })
-
-//req body
-//app.post('/register', (req, res)=> {
-//    console.log(req.body)
-    //res.json(req.body)
+//app.post ('/register',(req, res) =>{
+  //console.log (req.body)
+  //  res.json(req.body)
 //})
-app.use('/user/', require('./routes/User'))
-app.use('/kegiatan/', require('./routes/kegiatan'))
+app.use('/user',require('./routes/user'))
+app.use('/kegiatan',require('./routes/kegiatan'))
 
-app.listen(3000, () => {
-    console.log('server started')
+app.listen(4000,() => {
+    console.log('Server Started')
 })
