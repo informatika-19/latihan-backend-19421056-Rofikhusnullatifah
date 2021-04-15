@@ -1,17 +1,19 @@
-const userModel = require('../model/User')
+const router = require('express').Router()
+const userController = require('../controller/User')
+//router.post('register', (req, res)=>{
+//  const data = {
+//  a: 'coba'
+// }
+//console.log(req.body)
+router.post('/register', (req, res) =>{
+userController.register(re.body)
+.then(result => res.json(result))
+.catch(err => res.json(err))
+})
+router.post('/login', (req, res) =>{
+userController.login(req.body)
+.then(result => res.json(result))
+.catch(err => res.json(err))
+})
 
-exports.register =(data) =>
-new Promise((resolve, reject) => {
-    userModel.create(data)
-    .then(() => {
-        resolve({
-            sukses:true,
-            pesan: 'Berhasil Register'
-        })
-    }).catch(() => {
-        reject({
-            sukses : false,
-            pesan : 'Gagal Register'
-})
-    })
-})
+module.exports = router

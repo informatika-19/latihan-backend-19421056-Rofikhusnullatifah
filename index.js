@@ -1,33 +1,54 @@
+const { Console } = require('console')
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
-const cors = require ('cors')
-const bodyParser = require('body-parser')
+const bodyParser= require('body-parser')
+const mongoose= require ('mongoose')
 
-const mongoURL ='mongodb://localhost:27071/latihan'
-mongoose.connect(mongoURL, {
-    useCreateIndex: true,
-    useNewUrlparser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log('berhasil connec kedatabase')
-}).catch((err) => {
-    console.log('gagal connec kedatabase')
+mongoose.connect('mongodb://localhost:27017/latihan', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+}).then (() => {
+    console.log('connected')
+}).catch((e)=>{
+    console.log(e)
+    console.log('unconnected')
 })
-app.use(cors())
 
 app.use(bodyParser.json({
-    extended : true,
-    limit :'20mb'
+    extend: true,
+    limit: '20mb'
 }))
 
 app.use(bodyParser.urlencoded({
-    extended : true,
+    extend: true,
     limit: '20mb'
 }))
-//list router
-app.use('/user', require('./router/user'))
 
-app.listen(5000, function() {
-    console.log('server telah dijalankan di port 5000')
+app.get('/', (req, res)=>{
+    res.send('<h1>hello world 1</h1>')
+
+})
+
+app.get('/profile/:username/:id', (req, res)=>{
+    console.log(req.params)
+    res.send('username = '+ req.params.username)
+})
+//req params
+app.get('/daerah/:daerah', (req, res)=>{
+    console.log(req.params)
+    res.send('daerah anda = '+ req.params.daerah)
+})
+
+//req body
+//app.post('/register', (req, res)=> {
+//    console.log(req.body)
+    //res.json(req.body)
+//})
+app.use('/user/', require('./routes/User'))
+app.use('/kegiatan/', require('./routes/kegiatan'))
+
+app.listen(3000, () => {
+    console.log('server started')
 })
