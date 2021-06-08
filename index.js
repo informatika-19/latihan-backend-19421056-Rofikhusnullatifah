@@ -40,8 +40,8 @@ app.get('/daerah/:namadaerah/:id', (req, res) => {
   //console.log (req.body)
   //  res.json(req.body)
 //})
-app.use('/user',require('./routes/user'))
-app.use('/kegiatan',require('./routes/kegiatan'))
+app.use('/user',require('./router/User'))
+app.use('/kegiatan',require('./router/Kegiatan'))
 
 app.listen(4000,() => {
     console.log('Server Started')

@@ -1,4 +1,4 @@
-const userModel = require('../model/user')
+const userModel = require('../model/User')
 const bcrypt=require('bcrypt')
 exports.register = (data) =>
 new Promise((resolve, reject) =>{
@@ -15,6 +15,7 @@ new Promise((resolve, reject) =>{
         }else{
             bcrypt.hash(data.password, 10, (err, hash) => {
             data.password = hash
+            //untuk membuat insert,creat,atau membuat
                 userModel.create(data).then(() =>{
                     //console.log ('berhasil insert')
                     resolve({
@@ -66,21 +67,3 @@ new Promise((resolve,reject)=>{
 
 })
 })
-const router = require('express').Router()
-const userContrroller = require('../controller/user')
-router.post('/register', (req,res)=>{
-    userContrroller.register(req.body)
-        .then(result =>res.json(result))
-        .catch(err => res.json(err))
-})
-
-router.post('/login', (req,res)=>{
-    let username = req.body.username
-    let password = req.body.password
-    userContrroller.login(username, password)
-        .then(result =>res.json(result))
-        .catch(err => res.json(err))
-})
-
-        
-module.exports=router

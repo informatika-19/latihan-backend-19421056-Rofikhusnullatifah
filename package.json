@@ -9,9 +9,21 @@
   "author": "rofikhusnullatifah",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.12.13",
     "nodemon": "^2.0.7"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/informatika-19/latihan-backend-19421056-Rofikhusnullatifah.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/informatika-19/latihan-backend-19421056-Rofikhusnullatifah/issues"
+  },
+  "homepage": "https://github.com/informatika-19/latihan-backend-19421056-Rofikhusnullatifah#readme"
 }
